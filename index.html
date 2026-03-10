@@ -345,6 +345,7 @@ body{
 <canvas id="stars-canvas"></canvas>
 <div id="app">
 
+<!-- ════ WELCOME ════ -->
 <div id="screen-welcome" class="screen active">
   <div class="welcome-snake">🐍</div>
   <div class="welcome-title">Roro's Python Quest</div>
@@ -366,13 +367,14 @@ body{
     🚀 يلا نبدأ يا رورو!
   </button>
 </div>
-
+<!-- ════ LEVEL SELECT ════ -->
 <div id="screen-levels" class="screen">
   <div style="max-width:900px;width:100%;">
     <div class="levels-title">Choose Your <span>Level</span> 🎮</div>
     <div class="levels-sub">اختاري الليفل اللي عايزة تبدأي منه يا رورو</div>
     <div class="levels-grid">
 
+      <!-- Level 1 -->
       <div class="level-card l1" id="card-l1" onclick="startLevel(1)">
         <div class="level-icon">🌱</div>
         <div class="level-name">Level 1</div>
@@ -387,6 +389,7 @@ body{
         <div style="font-size:12px;color:var(--subtext);margin-top:6px;" id="prog-l1-text">0 / 20 Answered</div>
       </div>
 
+      <!-- Level 2 -->
       <div class="level-card l2 locked" id="card-l2" onclick="startLevel(2)">
         <div class="level-icon">🔥</div>
         <div class="level-name">Level 2</div>
@@ -401,6 +404,7 @@ body{
         <div class="lock-badge" id="lock-l2">🔒 أكملي Level 1 الأول</div>
       </div>
 
+      <!-- Project -->
       <div class="level-card pj locked" id="card-pj" onclick="startProject()">
         <div class="level-icon">🏗️</div>
         <div class="level-name">Final Project</div>
@@ -418,6 +422,7 @@ body{
   </div>
 </div>
 
+<!-- ════ QUESTION SCREEN ════ -->
 <div id="screen-question" class="screen" style="justify-content:flex-start;padding:0;">
   <div class="q-header">
     <button class="btn-nav" onclick="showScreen('levels')">← Levels</button>
@@ -452,6 +457,7 @@ body{
   </div>
 </div>
 
+<!-- ════ PROJECT SCREEN ════ -->
 <div id="screen-project" class="screen" style="justify-content:flex-start;padding:0;">
   <div style="width:100%;padding:14px 24px;background:rgba(6,7,26,0.95);border-bottom:1px solid var(--card-border);display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:10;">
     <button class="btn-nav" onclick="showScreen('levels')">← Levels</button>
@@ -464,6 +470,64 @@ body{
       المشروع ده هيجمع كل اللي اتعلمتيه في Python في برنامج واحد حلو!<br>
       اقري الكود كويس، حاولي تفهمي كل سطر، وبعدين شغليه على جهازك 🐍
     </div>
+
+    <div class="pj-section">
+      <div class="pj-section-title">📚 Topics Used</div>
+      <div class="pj-topics">
+        <span class="pj-topic">print()</span>
+        <span class="pj-topic">Variables</span>
+        <span class="pj-topic">Data Types</span>
+        <span class="pj-topic">type()</span>
+        <span class="pj-topic">Math Operators</span>
+        <span class="pj-topic">len()</span>
+        <span class="pj-topic">f-strings</span>
+      </div>
+      <div class="pj-desc" style="direction: ltr; text-align: left; padding: 15px; background: rgba(255,255,255,0.03); border-radius: 8px;">
+       <b style="color: var(--yellow); font-size: 18px;">🏆 Final Challenge: The Personal Info Card Generator</b><br><br>
+    
+        <span style="color: var(--pink); font-weight: bold;">Task Description:</span><br>
+       Create a Python program that stores your personal information in variables and performs some calculations to display a professional "Info Card".<br><br>
+    
+       <span style="color: var(--pink); font-weight: bold;">Requirements:</span><br>
+       1. <b>Variables:</b> Create variables for your full_name, nickname, city, birth_year, and favorite_number.<br>
+       2. <b>Calculations:</b><br>
+       &nbsp;&nbsp;• Calculate your age (Assume current year is 2025).<br>
+       &nbsp;&nbsp;• Calculate the length (number of letters) of both your full name and nickname.<br>
+        &nbsp;&nbsp;• Calculate the square (n²), cube (n³), and half (n/2) of your favorite number.<br>
+        3. <b>Data Types:</b> Show the type() of your name, age, and the "half" calculation.<br>
+        4. <b>Formatting:</b> Use f-strings and decorative lines (like === and ---) to print the final output exactly as shown in the "Expected Output" box.
+     </div>
+    </div>
+
+    <div class="pj-section">
+      <div class="pj-section-title">📋 Expected Output</div>
+      <div class="pj-output" id="pj-output"></div>
+    </div>
+
+    <div class="pj-section">
+      <div class="pj-section-title">🎯 Your Tasks</div>
+      <div style="font-size:15px;color:var(--subtext);line-height:2;direction:rtl;text-align:right;">
+        1️⃣ اقري الكود ده كويس وافهمي كل سطر<br>
+        2️⃣ شغلي الكود على جهازك في Python أو على أي Online Compiler<br>
+        3️⃣ غيري البيانات (الاسم، سنة الميلاد، الرقم المفضل) بتاعتك انتي<br>
+        4️⃣ حاولي تضيفي معلومة إضافية من عندك مثلاً المدينة أو الهواية<br>
+        5️⃣ لو عملتيها كلها، اضغطي Done! 🎉
+      </div>
+    </div>
+
+    <div class="pj-section">
+      <div class="pj-section-title">🧩 Bonus Challenge — تحدي إضافي!</div>
+      <div style="font-size:15px;color:var(--subtext);line-height:2;direction:rtl;text-align:right;">
+        حاولي تعملي برنامج جديد من الصفر بدون ما تبصي للكود فوق، فيه:<br>
+        ✨ اسمك الكامل واسمك الدلع<br>
+        ✨ عمرك وسنة ميلادك (محسوبة بالكود)<br>
+        ✨ طول اسمك الكامل واسم الدلع<br>
+        ✨ رقمك المفضل ومربعه ومكعبه<br>
+        ✨ نوع بيانات كل متغير<br>
+        ✨ الكل مطبوع بـ f-strings بشكل منظم وجميل! 🌸
+      </div>
+    </div>
+
     <div style="text-align:center;padding:16px 0 8px;">
       <button class="btn btn-primary" onclick="completeProject()" style="font-size:18px;padding:16px 48px;">
         🎉 Done! أنا خلصت المشروع!
@@ -472,6 +536,7 @@ body{
   </div>
 </div>
 
+<!-- ════ COMPLETE ════ -->
 <div id="screen-complete" class="screen">
   <div class="complete-emoji">🏆</div>
   <div class="complete-title">Mission Complete!</div>
@@ -496,8 +561,9 @@ body{
     </div>
   </div>
   <button class="btn btn-primary" onclick="location.reload()">🔄 ابدأ من الأول</button>
-</div>
+</div><!-- end #app -->
 
+<!-- ════ MODAL ════ -->
 </div><div class="modal-overlay" id="modal-overlay" onclick="closeModalOutside(event)">
   <div class="modal-box" id="modal-box">
     <div class="modal-icon" id="modal-icon"></div>
@@ -544,228 +610,283 @@ const L1 = [
   {
     topic:"print() — Basics",
     question:"1. Write a Python program to print the name \"Rawan\".",
-    hint:"عشان تطبعي حاجة، اكتبي ()print وجواها النص بين علامتين تنصيص \" \"",
+    code:null,
+    hint:"الـ print() function بتطبع أي حاجة بتحطيها جوه الأقواس على الشاشة مباشرةً — جربي تقري اللي جوه الأقواس!",
+    answer:"Rawan",
     solution:`الـ <b>print()</b> function بتطبع أي حاجة بتحطيها جواها على الشاشة.\nفي المثال ده بتطبع الكلمة <b>Rawan</b> لأنها الـ string الموجودة جوه الأقواس.\n\n💡 مهم: النص لازم يبقى جوه علامات تنصيص " " أو ' '`,
     solutionCode:'print("Rawan")'
   },
   {
     topic:"print() — Numbers",
     question:"2. Write a program to print the current year 2025.",
-    hint:"الأرقام بتتكتب جوه الأقواس بتاع ()print مباشرةً من غير علامات تنصيص.",
-    solution:`الـ <b>print()</b> بتطبع الأرقام مباشرةً من غير علامات تنصيص.\nالفرق بين <b>print(2025)</b> و <b>print("2025")</b> إن الأول رقم (int) والتاني نص (string)، بس الاتنين بيتطبعوا نفس الشكل.`,
+    code:null,
+    hint:"الأرقام في print() بتتطبع من غير ما تحتاجي علامات تنصيص — الـ print() شاطرة وبتفهم الأرقام مباشرةً",
+    answer:"2025",
+    solution:`الـ <b>print()</b> بتطبع الأرقام مباشرةً من غير علامات تنصيص.\nالفرق بين <b>print(2025)</b> و <b>print("2025")</b> إن الأول رقم (int) والتاني نص (string)، بس الاتنين بيتطبعوا نفس الشكل.\n\nالناتج: <b>2025</b>`,
     solutionCode:'print(2025)'
   },
   {
     topic:"print() — Multiple Values",
     question:"3. Print the two words \"Hello\" and \"Roro\" in a single line.",
-    hint:"استخدمي print() واكتبي الكلمتين جوه الأقواس، وافصلي بينهم بفاصلة (,)",
-    solution:`لما بتحطي أكتر من قيمة في <b>print()</b> وبتفصلي بينهم بفاصلة <b>,</b>:\nبيتطبعوا بفراغ تلقائي بينهم.\n\nيعني: <b>print("Hello", "Roro")</b> بتطبع: <b>Hello Roro</b>`,
+    code:null,
+    hint:"لما بتحطي أكتر من قيمة في print() بفاصلة بينهم — بيتطبعوا إزاي؟ فيه فراغ تلقائي بينهم!",
+    answer:"Hello Roro",
+    solution:`لما بتحطي أكتر من قيمة في <b>print()</b> وبتفصلي بينهم بفاصلة <b>,</b>:\nبيتطبعوا بفراغ تلقائي بينهم.\n\nيعني: <b>print("Hello", "Roro")</b> بتطبع: <b>Hello Roro</b>\n\n💡 لو عايزة تغيري الفراغ، استخدمي: print("Hello", "Roro", sep="-") → Hello-Roro`,
     solutionCode:'print("Hello", "Roro")'
   },
   {
     topic:"Variables — Storing Text",
     question:"4. Create a variable called nickname and assign it the value \"Roro\".",
-    hint:"اكتبي اسم المتغير nickname، وبعده علامة = ، وبعدين القيمة \"Roro\" (بين علامات تنصيص).",
-    solution:`عشان تخزني قيمة في متغير بتكتبي:\n<b>اسم المتغير = القيمة</b>\n\nيعني: <b>nickname = "Roro"</b>\n\n📌 علامة = هنا مش مساواة رياضية، هي "إسناد" (assignment).`,
+    code:null,
+    hint:"هتستخدمي علامة الـ = عشان تخزني القيمة — اكتبي اسم المتغير ورا كده = وبعدين القيمة. النص لازم فيه \" \"",
+    answer:'nickname = "Roro"',
+    solution:`عشان تخزني قيمة في متغير بتكتبي:\n<b>اسم المتغير = القيمة</b>\n\nيعني: <b>nickname = "Roro"</b>\n\n📌 علامة = هنا مش مساواة رياضية، هي "إسناد" (assignment) — بتقول لـ Python: "خزن Roro في nickname"`,
     solutionCode:'nickname = "Roro"'
   },
   {
     topic:"Variables — Storing Numbers",
     question:"5. Create a variable named age and store the number 21 in it.",
-    hint:"نفس فكرة السؤال اللي فات، بس الرقم بيتكتب من غير علامات تنصيص.",
-    solution:`عشان تخزني رقم في متغير:\n<b>اسم المتغير = الرقم</b>\n\nيعني: <b>age = 21</b>`,
+    code:null,
+    hint:"زي ما خزنتي النص، نفس الفكرة للأرقام — بس الأرقام مش محتاجة علامات تنصيص",
+    answer:"age = 21",
+    solution:`عشان تخزني رقم في متغير:\n<b>اسم المتغير = الرقم</b>\n\nيعني: <b>age = 21</b>\n\n💡 الأرقام مش محتاجة علامات تنصيص زي النصوص.\nلو كتبتي <b>age = "21"</b> يبقى ده string مش integer!`,
     solutionCode:'age = 21'
   },
   {
     topic:"Variables — Using Variables",
     question:"6. Assign the name \"Rawan\" to a variable, then print that variable.",
-    hint:"أول سطر خزن المتغير زي name = \"Rawan\"، السطر التاني اكتبي ()print وجواها المتغير من غير تنصيص.",
-    solution:`لما بتكتبي <b>print(name)</b> من غير علامات تنصيص حوالين name:\nبيطبع القيمة المخزنة في المتغير name وهي <b>Rawan</b>.`,
+    code:null,
+    hint:"لما بتعملي print لمتغير من غير علامات تنصيص — بيطبع إيه؟ بيطبع القيمة المخزنة فيه!",
+    answer:"Rawan",
+    solution:`لما بتكتبي <b>print(name)</b> من غير علامات تنصيص حوالين name:\nبيطبع القيمة المخزنة في المتغير name وهي <b>Rawan</b>.\n\n⚠️ الفرق:\n- <b>print(name)</b> → بيطبع قيمة المتغير: Rawan\n- <b>print("name")</b> → بيطبع الكلمة بتاعتها: name`,
     solutionCode:'name = "Rawan"\nprint(name)'
   },
   {
     topic:"Data Types — String",
     question:"7. Create a variable x and set it to the string \"Python\".",
-    hint:"زي أي متغير، = x وبعدها النص جوه علامات التنصيص.",
-    solution:`أي حاجة جوه علامات تنصيص <b>" "</b> أو <b>' '</b> نوعها <b>str (String)</b>.`,
+    code:null,
+    hint:"أي حاجة جوه علامات تنصيص نوعها إيه؟ فكري — str اختصار لإيه؟",
+    answer:"str  (String)",
+    solution:`أي حاجة جوه علامات تنصيص <b>" "</b> أو <b>' '</b> نوعها <b>str (String)</b>.\n\nأمثلة على Strings:\n✅ "Python"\n✅ "Rawan"\n✅ "Hello World"\n✅ "123" ← حتى لو أرقام بس جوه تنصيص!\n\nالـ String مخصص للنصوص والحروف.`,
     solutionCode:'x = "Python"'
   },
   {
     topic:"Data Types — Integer",
     question:"8. Change the value of variable y to the integer 42.",
-    hint:"هنا هنكتب اسم المتغير y = وبعدها الرقم الصحيح.",
-    solution:`الأرقام الصحيحة من غير فاصلة عشرية نوعها <b>int (Integer)</b>.`,
+    code:null,
+    hint:"الأرقام الصحيحة (من غير فاصلة عشرية) نوعها إيه؟ int اختصار لـ Integer",
+    answer:"int  (Integer)",
+    solution:`الأرقام الصحيحة من غير فاصلة عشرية نوعها <b>int (Integer)</b>.\n\nأمثلة على Integers:\n✅ 42, 0, -10, 2025, 1000000\n\n❌ مش int:\n- 3.14 → float\n- "42" → str (لأنه جوه تنصيص)`,
     solutionCode:'y = 42'
   },
   {
     topic:"Data Types — Float",
     question:"9. Create a variable named price and assign it a float value of 9.99.",
-    hint:"الـ float هو أي رقم فيه فاصلة عشرية (نقطة). اكتبيه بنفس الطريقة.",
-    solution:`الأرقام اللي فيها فاصلة عشرية نوعها <b>float</b>.\n\nالفرق بين int وfloat إن الـ float فيه نقطة عشرية.`,
+    code:null,
+    hint:"الأرقام اللي فيها فاصلة عشرية (نقطة) نوعها إيه؟",
+    answer:"float",
+    solution:`الأرقام اللي فيها فاصلة عشرية نوعها <b>float</b>.\n\nأمثلة على Floats:\n✅ 9.99, 3.14, 2.5, -0.5, 1.0\n\n💡 حتى 1.0 هو float مش int لأن فيه نقطة عشرية!\n\nالفرق بين int وfloat إن الـ float فيه نقطة عشرية.`,
     solutionCode:'price = 9.99'
   },
   {
     topic:"Data Types — Boolean",
     question:"10. Define two boolean variables: is_student as True and has_glasses as False.",
-    hint:"اكتبي المتغير الأول = True، وانزلي سطر واكتبي المتغير التاني = False (أول حرف كابيتال).",
-    solution:`الـ <b>bool (Boolean)</b> نوع بيانات ليه قيمتين بس:\n✅ <b>True</b>  (صح)\n✅ <b>False</b> (غلط)\n\n⚠️ مهم جداً: لازم يبدأوا بحرف كبير في Python!`,
+    code:null,
+    hint:"الـ Boolean بس ليه قيمتين! ولازم يبدأوا بحرف كبير في Python — صح ولا غلط؟",
+    answer:"True  and  False",
+    solution:`الـ <b>bool (Boolean)</b> نوع بيانات ليه قيمتين بس:\n✅ <b>True</b>  (صح)\n✅ <b>False</b> (غلط)\n\n⚠️ مهم جداً: لازم يبدأوا بحرف كبير في Python!\n- <b>True</b> ✅  (صح)\n- <b>true</b> ❌  (غلط - هيديكي Error!)\n\nالـ bool بيتستخدم في الشروط والمقارنات.`,
     solutionCode:'is_student = True\nhas_glasses = False'
   },
   {
     topic:"type() — Check Integer",
     question:"11. Write code to check and print the data type of the number 42.",
-    hint:"عشان نطبع النوع، هندخل دالة جوه دالة: هنكتب (type(42 جوه القوس بتاع الـ ()print",
-    solution:`الـ <b>type()</b> function بترجع نوع البيانات بشكل رسمي.\n\ntype(42) بترجع: <b>&lt;class 'int'&gt;</b>\n\nلأن 42 رقم صحيح (integer).`,
+    code:null,
+    hint:"الـ type() function بترجع نوع البيانات اللي بتحطيها جواها — 42 رقم صحيح، نوعه إيه؟",
+    answer:"<class 'int'>",
+    solution:`الـ <b>type()</b> function بترجع نوع البيانات بشكل رسمي.\n\ntype(42) بترجع: <b>&lt;class 'int'&gt;</b>\n\nلأن 42 رقم صحيح (integer).\n\nالـ type() مفيدة جداً لما مش بتكوني متأكدة من نوع المتغير 🔍`,
     solutionCode:'print(type(42))'
   },
   {
     topic:"type() — Check String",
     question:"12. Write code to check and print the data type of the string \"Roro\".",
-    hint:"نفس اللي فات، بس المرة دي النص \"Roro\" هو اللي جوه الـ type",
-    solution:`type("Roro") بترجع: <b>&lt;class 'str'&gt;</b>\n\nلأن "Roro" نوعه string (نص).`,
+    code:null,
+    hint:"نفس فكرة السؤال اللي فات، بس المرة دي مع نص — الـ string نوعه إيه في Python؟",
+    answer:"<class 'str'>",
+    solution:`type("Roro") بترجع: <b>&lt;class 'str'&gt;</b>\n\nلأن "Roro" نوعه string (نص).\n\n📌 ملخص أنواع type():\n- type(42) → &lt;class 'int'&gt;\n- type(3.14) → &lt;class 'float'&gt;\n- type("Hi") → &lt;class 'str'&gt;\n- type(True) → &lt;class 'bool'&gt;`,
     solutionCode:'print(type("Roro"))'
   },
   {
     topic:"Math Operators — Precedence",
     question:"13. Calculate 15+4×2 and print the result.",
-    hint:"اعملي متغير result وخزني فيه العملية، والضرب علامته * ، وبعدها اطبعي المتغير.",
-    solution:`في Python (وفي الرياضيات) العمليات بتتم بالأولوية:\n1️⃣ ** (أس)\n2️⃣ * / // % (ضرب وقسمة)\n3️⃣ + - (جمع وطرح)\n\nيعني: 15 + <b>4 * 2</b> = 15 + <b>8</b> = <b>23</b>`,
+    code:null,
+    hint:"فكري في أولوية العمليات — في الرياضيات والبرمجة الضرب والقسمة بيتعملوا قبل الجمع والطرح!",
+    answer:"23",
+    solution:`في Python (وفي الرياضيات) العمليات بتتم بالأولوية:\n1️⃣ ** (أس)\n2️⃣ * / // % (ضرب وقسمة)\n3️⃣ + - (جمع وطرح)\n\nيعني: 15 + <b>4 * 2</b> = 15 + <b>8</b> = <b>23</b>\n\n💡 لو عايزة تغيري الترتيب استخدمي أقواس:\n(15 + 4) * 2 = 19 * 2 = 38`,
     solutionCode:'result = 15 + 4 * 2\nprint(result)'
   },
   {
     topic:"Math Operators — Division Types",
     question:"14. Print the result of 7÷2 using both standard division and floor division.",
-    hint:"هتعملي 2 print، الأولى باستخدام / والتانية باستخدام //",
-    solution:`في Python فيه نوعين من القسمة:\n\n<b>/</b> القسمة العادية → بترجع float:\n7 / 2 = <b>3.5</b>\n\n<b>//</b> Floor Division → بترجع int (بتقطع الكسر):\n7 // 2 = <b>3</b>`,
+    code:null,
+    hint:"في Python فيه نوعين من القسمة — / العادية و // الصحيحة — الفرق في النتيجة!",
+    answer:"3.5  then  3",
+    solution:`في Python فيه نوعين من القسمة:\n\n<b>/</b> القسمة العادية → بترجع float:\n7 / 2 = <b>3.5</b>\n\n<b>//</b> Floor Division → بترجع int (بتقطع الكسر):\n7 // 2 = <b>3</b>  (مش بتقرب، بتقطع!)\n\n💡 مثال:\n-7 // 2 = -4 مش -3 (بتقرب لأصغر عدد صحيح)`,
     solutionCode:'print(7 / 2)\nprint(7 // 2)'
   },
   {
     topic:"Math Operators — Modulo",
     question:"15. Use the modulo operator to find the remainder of 10÷3.",
-    hint:"علامة باقي القسمة (Modulo) هي % ، اكتبها جوه الـ print",
-    solution:`الـ <b>%</b> (Modulo) بيرجع الباقي من القسمة:\n10 ÷ 3 = 3 والباقي <b>1</b>\n\nيعني: 10 % 3 = <b>1</b>`,
+    code:null,
+    hint:"الـ % (Modulo) بيرجع الباقي من القسمة — 10 ÷ 3 الناتج 3 والباقي إيه؟",
+    answer:"1",
+    solution:`الـ <b>%</b> (Modulo) بيرجع الباقي من القسمة:\n10 ÷ 3 = 3 والباقي <b>1</b>\n\nيعني: 10 % 3 = <b>1</b>\n\n💡 استخدامات مشهورة:\n- رقم % 2 == 0 → الرقم زوجي\n- رقم % 2 == 1 → الرقم فردي\n\nمثال: 10 % 2 = 0 (زوجي) ✅`,
     solutionCode:'print(10 % 3)'
   },
   {
     topic:"Math Operators — Power",
     question:"16. Calculate 2 to the power of 10 and print the result.",
-    hint:"علامة الأس في البايثون هي النجمتين **",
-    solution:`في Python الأس بيتكتب بـ <b>**</b> (نجمتين) مش ^ :\n\n<b>2 ** 10</b> = 1024`,
-    solutionCode:'result = 2 ** 10\nprint(result)'
+    code:null,
+    hint:"الأس في Python مش ^ زي الآلة الحاسبة — في Python بيستخدم ** (نجمتين)",
+    answer:"1024",
+    solution:`في Python الأس بيتكتب بـ <b>**</b> (نجمتين) مش ^ :\n\n<b>2 ** 10</b> = 1024\n\n⚠️ مهم: الـ ^ في Python بيعمل حاجة تانية (Bitwise XOR)\n\nأمثلة:\n- 2 ** 3 = 8\n- 3 ** 2 = 9\n- 10 ** 0 = 1`,
+    solutionCode:'result = 2 ** 10\nprint(result)  # 1024'
   },
   {
     topic:"len() — String Length",
     question:"17. Use a function to find and print the number of letters in \"Rawan\".",
-    hint:"عشان تعدي الحروف، دخلي (\"len(\"Rawan جوه الـ ()print",
-    solution:`الـ <b>len()</b> function بتعد عدد العناصر في الـ string.\n\nlen("Rawan") = R-a-w-a-n = <b>5</b> حروف`,
+    code:null,
+    hint:"الـ len() بتعد عدد الـ characters (الحروف) في الـ string — عدي حروف Rawan!",
+    answer:"5",
+    solution:`الـ <b>len()</b> function بتعد عدد العناصر في الـ string.\n\nlen("Rawan") = R-a-w-a-n = <b>5</b> حروف\n\n📌 الـ len() بتعد:\n✅ الحروف\n✅ الأرقام جوه النص\n✅ المسافات\n✅ الرموز والعلامات\n\nيعني len("Hi!") = 3`,
     solutionCode:'print(len("Rawan"))'
   },
   {
     topic:"len() — Spaces Count",
     question:"18. Print the length of the string \"Hello World\" including the space.",
-    hint:"نفس اللي فاتت بالظبط، بس هتكتبي \"Hello World\"",
-    solution:`len("Hello World") = <b>11</b>\n\n💡 الـ len() بتعد كل character حتى المسافات والرموز!`,
+    code:null,
+    hint:"المسافة (Space) بين الكلمتين هي character كمان! الـ len() بتعدها!",
+    answer:"11",
+    solution:`len("Hello World") = <b>11</b>\n\nليه 11؟ لأن:\nH-e-l-l-o = 5\n(space) = 1  ← المسافة بتتعد!\nW-o-r-l-d = 5\n5 + 1 + 5 = <b>11</b>\n\n💡 الـ len() بتعد كل character حتى المسافات والرموز!`,
     solutionCode:'print(len("Hello World"))'
   },
   {
     topic:"f-strings — Basic",
     question:"19. Use an f-string to print \"My name is Roro\" using a variable named name.",
-    hint:"الـ f-string بتتكتب كده: print(f\"Text {variable}\") - عرفي المتغير الأول",
-    solution:`الـ <b>f-string</b> بتعمليها بـ f قبل الـ quote وبتحطي المتغير جوه <b>{}</b>:\n\n<b>print(f"My name is {name}")</b>\n\nده بيطبع: My name is Roro`,
-    solutionCode:'name = "Roro"\nprint(f"My name is {name}")'
+    code:null,
+    hint:"الـ f-string بتحطي f قبل علامة التنصيص وجوه الأقواس {} بتحطي اسم المتغير",
+    answer:'print(f"My name is {name}")',
+    solution:`الـ <b>f-string</b> بتعمليها بـ f قبل الـ quote وبتحطي المتغير جوه <b>{}</b>:\n\n<b>print(f"My name is {name}")</b>\n\nده بيطبع: My name is Roro\n\n💡 الـ Python بيبدل {name} بقيمة المتغير تلقائياً!\nالـ f-strings أسهل وأوضح من الطريقة القديمة بالـ +`,
+    solutionCode:'name = "Roro"\nprint(f"My name is {name}")\n# Output: My name is Roro'
   },
   {
     topic:"f-strings — With Expression",
     question:"20. Use an f-string to display the mathematical result of 3×4.",
-    hint:"اكتبي جوه الـ f-string النص \"3 * 4 = \" وبعدين افتحي قوسين {} واعملي العملية جواها.",
-    solution:`الـ f-string ممكن تحسب عمليات حسابية جوه <b>{}</b>:\n\n{3 * 4} بيتحسب الأول وبيطبع الناتج <b>12</b>`,
+    code:null,
+    hint:"الـ f-string مش بس للمتغيرات — ممكن تعملي عمليات حسابية جوه {} مباشرةً!",
+    answer:"3 * 4 = 12",
+    solution:`الـ f-string ممكن تحسب عمليات حسابية جوه <b>{}</b>:\n\n{3 * 4} بيتحسب الأول وبيطبع الناتج <b>12</b>\n\nالناتج: <b>3 * 4 = 12</b>\n\n💡 ممكن تعملي أي عملية جوه {}:\n- {2 + 2} → 4\n- {len("hi")} → 2\n- {10 // 3} → 3`,
     solutionCode:'print(f"3 * 4 = {3 * 4}")'
   }
 ];
 
+// ══════════════════════════════════════
+//  DATA — LEVEL 2 (12 questions)
+// ══════════════════════════════════════
 const L2 = [
   {
     topic:"Variables + Math + print()",
     question:"1. Create two variables x and y, then print their sum, difference, and product.",
-    hint:"عرفي المتغيرين. وفي سطر الطباعة، افصلي بين (x+y) و (x-y) و (x*y) بفاصلة.",
-    solution:`بنتتبع العمليات:\nx = 10, y = 3\nx + y = 13\nx - y = 7\nx * y = 30\n\nالناتج: <b>13 7 30</b>`,
+    code:null,
+    answer:"13 7 30",
+    solution:`بنتتبع العمليات:\nx = 10, y = 3\n\nx + y = 10 + 3 = <b>13</b>\nx - y = 10 - 3 = <b>7</b>\nx * y = 10 * 3 = <b>30</b>\n\nالـ print() بيطبعهم بفراغ بينهم تلقائياً:\nالناتج: <b>13 7 30</b>`,
     solutionCode:'x = 10\ny = 3\nprint(x + y, x - y, x * y)'
   },
   {
     topic:"f-strings + Power Operator",
     question:"2. Using an f-string, print the square of 5 and the cube of 4.",
-    hint:"ممكن تعمليها بمتغيرات a=5 و b=4، واستخدمي {a**2} جوه الـ f-string.",
-    solution:`الـ f-string بتحسب التعبيرات جوه {}:\n\nالناتج: <b>5 squared is 25 and 4 cubed is 64</b>`,
+    code:null,
+    answer:"5 squared is 25 and 4 cubed is 64",
+    solution:`الـ f-string بتحسب التعبيرات جوه {}:\n\na = 5:\na**2 = 5**2 = <b>25</b>  (5 مربعة)\n\nb = 4:\nb**3 = 4**3 = <b>64</b>  (4 مكعبة)\n\nالناتج: <b>5 squared is 25 and 4 cubed is 64</b>`,
     solutionCode:'a = 5\nb = 4\nprint(f"{a} squared is {a**2} and {b} cubed is {b**3}")'
   },
   {
     topic:"type() + Multiple Variables",
     question:"3. Print the data types of the float 3.14 and the string \"Pi\".",
-    hint:"جوه الـ print، اكتبي type(x) وبعدها فاصلة وبعدها type(y).",
-    solution:`type() بترجع نوع كل متغير:\nx = 3.14 → <b>&lt;class 'float'&gt;</b>\ny = "Pi" → <b>&lt;class 'str'&gt;</b>`,
+    code:null,
+    answer:"<class 'float'> <class 'str'>",
+    solution:`type() بترجع نوع كل متغير:\n\nx = 3.14 → فيه فاصلة عشرية → <b>&lt;class 'float'&gt;</b>\ny = "Pi" → نص → <b>&lt;class 'str'&gt;</b>\n\nالـ print() بيطبعهم بفراغ بينهم:\nالناتج: <b>&lt;class 'float'&gt; &lt;class 'str'&gt;</b>`,
     solutionCode:'x = 3.14\ny = "Pi"\nprint(type(x), type(y))'
   },
   {
     topic:"len() + Variables + f-strings",
     question:"4. Create a variable for a city name and print the name along with its length.",
-    hint:"جوه الـ f-string هتحطي المتغير {city} وقوس تاني تحطي فيه {len(city)}.",
-    solution:`بنجمع f-string مع len() مع variable.\n\nالناتج: <b>City: Cairo, Letters: 5</b>`,
+    code:null,
+    answer:"City: Cairo, Letters: 5",
+    solution:`بنجمع f-string مع len() مع variable:\n\ncity = "Cairo"\nlen(city) = len("Cairo") = C-a-i-r-o = <b>5</b>\n\nالـ f-string بتبدل:\n- {city} بـ Cairo\n- {len(city)} بـ 5\n\nالناتج: <b>City: Cairo, Letters: 5</b>`,
     solutionCode:'city = "Cairo"\nprint(f"City: {city}, Letters: {len(city)}")'
   },
   {
     topic:"Variables — Reassignment",
     question:"5. Create a score variable, increase it by 10, then by 5, and print the total.",
-    hint:"عشان تزودي على متغير بتكتبي score = score + 10",
-    solution:`المتغيرات ممكن تتغير قيمتها في كل سطر.\n\nprint(score) بتطبع: <b>15</b>`,
+    code:null,
+    answer:"15",
+    solution:`المتغيرات ممكن تتغير قيمتها:\n\nخطوة 1: score = <b>0</b>\nخطوة 2: score = 0 + 10 = <b>10</b>\nخطوة 3: score = 10 + 5 = <b>15</b>\n\nprint(score) بتطبع: <b>15</b>\n\n💡 كل سطر بيعدل قيمة score على القيمة الجديدة.`,
     solutionCode:'score = 0\nscore = score + 10\nscore = score + 5\nprint(score)'
   },
   {
     topic:"Complex Math — Combined Operators",
     question:"6. Solve the following equation: 2³+(10//3)−(7%3).",
-    hint:"اكتبي العملية الحسابية زي ما هي بالرموز البرمجية بتاعتها (** للأس، // للقسمة، % للباقي).",
-    solution:`بنحل حسب الأولوية:\n1️⃣ <b>2**3</b> = 8\n2️⃣ <b>10//3</b> = 3\n3️⃣ <b>7%3</b> = 1\n\nبعدين: 8 + 3 - 1 = <b>10</b>`,
+    code:null,
+    answer:"10",
+    solution:`بنحل حسب الأولوية (أس أول، بعدين باقي/قسمة، بعدين جمع/طرح):\n\n1️⃣ <b>2**3</b> = 8  (أس)\n2️⃣ <b>10//3</b> = 3  (floor division: 10÷3=3.33 → 3)\n3️⃣ <b>7%3</b> = 1  (باقي القسمة: 7÷3=2 والباقي 1)\n\nبعدين: 8 + 3 - 1 = <b>10</b>\n\nالناتج: <b>10</b>`,
     solutionCode:'result = 2**3 + 10//3 - 7%3\nprint(result)'
   },
   {
     topic:"f-strings + len() + Two Variables",
     question:"7. Combine a first and last name in an f-string and show the total number of letters.",
-    hint:"عشان تجمعي عدد الحروف: {len(first) + len(last)} جوه الـ f-string.",
-    solution:`بنحسب طول first وطول last وبنجمعهم جوه الـ f-string.\nالناتج: <b>Full name: Rawan Elbadry (12 letters)</b>`,
+    code:null,
+    answer:"Full name: Rawan Elbadry (12 letters)",
+    solution:`بنحسب:\nfirst = "Rawan" → len(first) = 5  (R-a-w-a-n)\nlast = "Elbadry" → len(last) = 7  (E-l-b-a-d-r-y)\n\nlen(first) + len(last) = 5 + 7 = <b>12</b>\n\nالـ f-string بتجمعهم:\nالناتج: <b>Full name: Rawan Elbadry (12 letters)</b>`,
     solutionCode:'first = "Rawan"\nlast = "Elbadry"\nprint(f"Full name: {first} {last} ({len(first) + len(last)} letters)")',
   },
   {
     topic:"type() + len() + print()",
     question:"8. Print the type and the length of the word \"Code\".",
-    hint:"الـ print ممكن تاخد حاجتين: (type(word و (len(word",
-    solution:`بنحسب:\ntype(word) = <b>&lt;class 'str'&gt;</b>\nlen(word) = <b>4</b>`,
+    code:null,
+    answer:"<class 'str'> 4",
+    solution:`بنحسب:\nword = "Code"\n\ntype(word) = <b>&lt;class 'str'&gt;</b>  (لأنه نص)\nlen(word) = len("Code") = C-o-d-e = <b>4</b>\n\nالـ print() بيطبعهم بفراغ:\nالناتج: <b>&lt;class 'str'&gt; 4</b>`,
     solutionCode:'word = "Code"\nprint(type(word), len(word))'
   },
   {
     topic:"Data Types — Tricky Types",
     question:"9. Assign four different data types (Boolean, Integer, String, Float) to variables a, b, c, and d.",
-    hint:"خلي بالك! الـ string هو أي حاجة جوه علامات تنصيص حتى لو كانت رقم زي \"3.14\".",
-    solution:`c ده حيلة! لأن "3.14" جوه "" فهو string مش float رغم إنه شبه الرقم!`,
+    code:null,
+    answer:"a:bool  b:int  c:str  d:float",
+    solution:`بنفحص كل واحد:\n\na = True → <b>bool</b>  (بوليان)\nb = 255 → <b>int</b>  (رقم صحيح)\nc = "3.14" → <b>str</b>  ← التحدي! لأنه جوه تنصيص! مش float!\nd = 2.718 → <b>float</b>  (رقم عشري)\n\n💡 c ده حيلة! لأن "3.14" جوه "" فهو string مش float رغم إنه شبه الرقم!`,
     solutionCode:'a = True\nb = 255\nc = "3.14"\nd = 2.718'
   },
   {
     topic:"f-strings + type() + Math",
     question:"10. Use an f-string to display a number's value, its type, and its double.",
-    hint:"الضعف يعني الرقم مضروب في 2. اكتبيه جوه الأقواس {num*2}.",
-    solution:`الـ f-string بتحسب كل حاجة جوه {}:\n\nالناتج:\n<b>Value: 42, Type: &lt;class 'int'&gt;, Double: 84</b>`,
+    code:null,
+    answer:"Value: 42, Type: <class 'int'>, Double: 84",
+    solution:`الـ f-string بتحسب كل حاجة جوه {}:\n\nnum = 42\n- {num} = <b>42</b>\n- {type(num)} = <b>&lt;class 'int'&gt;</b>\n- {num*2} = 42 * 2 = <b>84</b>\n\nالناتج:\n<b>Value: 42, Type: &lt;class 'int'&gt;, Double: 84</b>`,
     solutionCode:'num = 42\nprint(f"Value: {num}, Type: {type(num)}, Double: {num*2}")'
   },
   {
     topic:"len() + Math + f-strings",
     question:"11. For the string \"Python\", print its length, half its length, and its length squared.",
-    hint:"نصف الطول هنجيبه بالقسمة الصحيحة {len(s)//2} والمربع بالأس {len(s)**2}.",
-    solution:`الناتج: <b>Length: 6, Half: 3, Squared: 36</b>`,
+    code:null,
+    answer:"Length: 6, Half: 3, Squared: 36",
+    solution:`s = "Python"\nlen(s) = P-y-t-h-o-n = <b>6</b>\n\nبنحسب:\n- Length: {len(s)} = <b>6</b>\n- Half: {len(s)//2} = 6//2 = <b>3</b>\n- Squared: {len(s)**2} = 6**2 = <b>36</b>\n\nالناتج: <b>Length: 6, Half: 3, Squared: 36</b>`,
     solutionCode:'s = "Python"\nprint(f"Length: {len(s)}, Half: {len(s)//2}, Squared: {len(s)**2}")'
   },
   {
     topic:"Everything Combined — Full Trace",
     question:"12. Create a profile for \"Roro\" that calculates birth year from age and shows the name length and data types.",
-    hint:"هتحتاجي متغيرات لـ name, age, year واعملي كذا print سطر ورا سطر.",
-    solution:`بنتتبع كل print() بنحسب فيها السنة المطلوبة بالطرح ونجيب الطول بـ len.`,
+    code:null,
+    answer:"Roro is 20 years old.\nBorn in 2005. Name has 4 letters.\n<class 'int'>",
+    solution:`بنتتبع كل print():\n\n<b>print 1:</b> f"{name} is {age} years old."\n→ name="Roro", age=20\n→ <b>Roro is 20 years old.</b>\n\n<b>print 2:</b> f"Born in {year - age}. Name has {len(name)} letters."\n→ year-age = 2025-20 = 2005\n→ len("Roro") = 4\n→ <b>Born in 2005. Name has 4 letters.</b>\n\n<b>print 3:</b> type(age) = type(20)\n→ <b>&lt;class 'int'&gt;</b>`,
     solutionCode:'name = "Roro"\nyear = 2025\nage = 20\nprint(f"{name} is {age} years old.")\nprint(f"Born in {year - age}. Name has {len(name)} letters.")\nprint(type(age))'
   }
 ];
@@ -780,12 +901,26 @@ const L1_CORRECT = [
   "💫 ممتاز يا رورو! الـ Python محظوظة إنك بتتعلميها!",
   "🚀 برافووو! استمري كده يا نجمة! كل سؤال وانتي أحسن!",
   "⭐ إجابة صح! انتي من أشطر الطلبة بجد! فخورين بيكي!",
-  "🎯 100% صح! دماغ حلوة وفاهمة! كملي يا قمر!"
+  "🎯 100% صح! دماغ حلوة وفاهمة! كملي يا قمر!",
+  "💪 شطورة يا رورو! واضح إنك بتذاكري بجد وبتفهمي كويس!",
+  "🏅 أحسنتي! إجابة ممتازة! انتي على الطريق الصح دايماً!",
+  "✨ وووه يا رورو! صح تمام! عندك موهبة حقيقية في البرمجة!"
 ];
+
 const L2_CORRECT = [
   "🏆 يا سلام عليكي يا رورو! ده مستوى تاني خالص! انتي بقيتي Pro!",
   "🔥💥 وووه خطيرة! مسألة صعبة وحليتيها بكل سهولة! عبقرية بجد!",
-  "🌠 سبحان الله! الليفل الصعب وانتي ماشية فيه زي الريح! Incredible!"
+  "🌠 سبحان الله! الليفل الصعب وانتي ماشية فيه زي الريح! Incredible!",
+  "👑 يا ملكة البرمجة! مفيش حاجة تقف قدامك! هتبقي Developer جامدة!",
+  "🚀🌙 انتي مش بس فاهمة، انتي متفوقة! الـ Python بتسلم عليكي بجد!",
+  "💎 ياه! الصعب اتحل! انتي أقوى من أي مسألة! استمري يا نجمة!"
+];
+
+const L2_WRONG_1 = [
+  "💪 متستسلميش يا رورو! انتي أقوى من كده بكتير! جربي تاني!",
+  "🌟 ملهاش غير جربي تاني! الغلط مش عيب، الاستسلام هو العيب!",
+  "🔥 هتعرفيها المرة الجاية! ثقي في نفسك وجربي تاني يا رورو!",
+  "💫 مش مشكلة يا رورو! كل حاجة محتاجة وقت. جربي تاني وانتي هادية!"
 ];
 
 // ══════════════════════════════════════
@@ -826,11 +961,14 @@ function showScreen(name) {
 function updateLevelCards() {
   const l1done = state.answered.l1.size;
   const l2done = state.answered.l2.size;
+
   document.getElementById('prog-l1').style.width = (l1done/20*100)+'%';
   document.getElementById('prog-l1-text').textContent = l1done + ' / 20 Answered';
+
   document.getElementById('prog-l2').style.width = (l2done/12*100)+'%';
   document.getElementById('prog-l2-text').textContent = l2done + ' / 12 Answered';
 
+  // Unlock L2 when L1 complete
   const l2card = document.getElementById('card-l2');
   const lockl2 = document.getElementById('lock-l2');
   if (l1done >= 20) {
@@ -838,6 +976,7 @@ function updateLevelCards() {
     lockl2.style.display='none';
   }
 
+  // Unlock Project when L2 complete
   const pjcard = document.getElementById('card-pj');
   const lockpj = document.getElementById('lock-pj');
   if (l2done >= 12) {
@@ -855,7 +994,9 @@ function startLevel(lvl) {
     return;
   }
   state.currentLevel = lvl;
+  state.currentQ = 0;
   const questions = lvl === 1 ? L1 : L2;
+  // Find first unanswered, or start from 0
   const answered = state.answered['l'+lvl];
   let startIdx = 0;
   for (let i = 0; i < questions.length; i++) {
@@ -876,6 +1017,7 @@ function startProject() {
     return;
   }
   showScreen('project');
+  renderProject();
 }
 
 // ══════════════════════════════════════
@@ -889,6 +1031,7 @@ function renderQuestion() {
   const q = questions[idx];
   const answered = state.answered['l'+lvl];
 
+  // Header
   const label = document.getElementById('q-level-label');
   label.textContent = 'Level ' + lvl;
   label.className = 'q-level-badge ' + (lvl===1?'badge-l1-q':'badge-l2-q');
@@ -899,22 +1042,37 @@ function renderQuestion() {
 
   document.getElementById('q-counter').textContent = (idx+1) + ' / ' + total;
   document.getElementById('q-score-val').textContent = state.scores['l'+lvl];
-
+  
+  // Content
   document.getElementById('q-topic-text').textContent = q.topic;
   document.getElementById('q-num-text').textContent = 'Question ' + (idx+1);
   document.getElementById('q-text').textContent = q.question;
 
+  // Code block
+  const codeBlock = document.getElementById('q-code-block');
+  if (q.code) {
+    codeBlock.innerHTML = '<pre><code class="language-python">' + escapeHtml(q.code) + '</code></pre>';
+    codeBlock.style.display = 'block';
+    hljs.highlightAll();
+  } else {
+    codeBlock.innerHTML = '';
+    codeBlock.style.display = 'none';
+  }
+
+  // Hint (Level 1 only)
   const hintBox = document.getElementById('hint-box');
   if (lvl === 1) {
     hintBox.style.display = 'flex';
-    document.getElementById('hint-text').textContent = "السطر ده بيشرح الفكرة، لو احتجتي كود شوفي المساعد وقت الكتابة!";
+    document.getElementById('hint-text').textContent = q.hint;
     hintBox.classList.remove('open');
   } else {
     hintBox.style.display = 'none';
   }
 
+  // Actions
   const actionsDiv = document.getElementById('q-actions');
   const navDiv = document.getElementById('q-nav');
+
   if (answered.has(idx)) {
     actionsDiv.style.display = 'none';
     navDiv.style.display = 'flex';
@@ -923,12 +1081,15 @@ function renderQuestion() {
     navDiv.style.display = 'none';
   }
 
+  // Nav buttons
   document.getElementById('btn-prev').disabled = idx === 0;
   document.getElementById('btn-next').textContent = idx === total-1 ? 'Back to Levels ↩' : 'Next →';
 }
 
 function toggleHint() {
   document.getElementById('hint-box').classList.toggle('open');
+
+  
 }
 
 // ══════════════════════════════════════
@@ -1021,10 +1182,32 @@ function checkUserCode() {
 
 function giveUpShowSolution() {
   const lvl = state.currentLevel;
-  const q = (lvl === 1 ? L1 : L2)[state.currentQ];
-  showWrongModal(q, ()=>afterAnswer());
-  state.answered['l'+lvl].add(state.currentQ); // Mark as answered but no point added
+  const idx = state.currentQ;
+  const q = (lvl === 1 ? L1 : L2)[idx];
+  const key = lvl + '_' + idx;
+
+  if (lvl === 1) {
+    // في Level 1: لو ضغطت "مش عارفة" بيعرض الحل فوراً
+    showWrongModal(q, ()=>afterAnswer());
+    state.answered['l'+lvl].add(idx);
+  } else {
+    // في Level 2: أول مرة تشجيع، تاني مرة يعرض الحل
+    const attempts = state.wrongAttempts['giveup_' + key] || 0;
+    state.wrongAttempts['giveup_' + key] = attempts + 1;
+
+    if (attempts === 0) {
+      // رسائل التشجيع لليفل 2
+      const encourageMsgs = L2_WRONG_1;
+      const msg = encourageMsgs[Math.floor(Math.random() * encourageMsgs.length)];
+      showEncourageModal(msg);
+    } else {
+      // لو ضغطت "مش عارفة" للمرة التانية، اعرض الحل
+      showWrongModal(q, ()=>afterAnswer());
+      state.answered['l'+lvl].add(idx);
+    }
+  }
 }
+
 
 function afterAnswer() {
   const lvl = state.currentLevel;
@@ -1066,9 +1249,44 @@ function goQuestion(dir) {
   window.scrollTo(0,0);
 }
 
+// ══════════════════════════════════════
+//  PROJECT
+// ══════════════════════════════════════
+function renderProject() {
+  const expectedOutput = `===================================
+    🌸 PERSONAL INFO CARD 🌸
+===================================
+  Full Name   : Rawan Elbadry
+  Nickname    : Roro
+  City        : Egypt
+  Age         : 20 years old
+  Born in     : 2005
+-----------------------------------
+  Name Length     : 14 letters
+  Nickname Length : 4 letters
+-----------------------------------
+  Favorite Number : 7
+  Squared         : 49
+  Cubed           : 343
+  Half            : 3.5
+-----------------------------------
+  Type of name    : <class 'str'>
+  Type of age     : <class 'int'>
+  Type of half    : <class 'float'>
+===================================
+  ✨ Coded by Roro with Python! ✨
+===================================`;
+
+  const outputEl = document.getElementById('pj-output');
+  if(outputEl) {
+    outputEl.textContent = expectedOutput;
+  }
+}
+
 function completeProject() {
   state.completedLevels.pj = true;
-  spawnConfetti(); spawnConfetti(); setTimeout(spawnConfetti, 300);
+  spawnConfetti();
+  setTimeout(spawnConfetti, 300);
   document.getElementById('final-score-l1').textContent = state.scores.l1 + '/20';
   document.getElementById('final-score-l2').textContent = state.scores.l2 + '/12';
   showScreen('complete');
@@ -1108,6 +1326,19 @@ function showWrongModal(q, callback) {
   btn.onclick = () => { closeModal(); if(callback) callback(); };
   openModal();
   hljs.highlightAll();
+}
+
+function showEncourageModal(msg) {
+  const box = document.getElementById('modal-box');
+  box.className = 'modal-box wrong';
+  document.getElementById('modal-icon').textContent = '💪';
+  document.getElementById('modal-title').textContent = 'متستسلميش!';
+  document.getElementById('modal-message').textContent = msg;
+  document.getElementById('modal-solution').innerHTML = '';
+  const btn = document.getElementById('modal-close-btn');
+  btn.textContent = 'هحاول تاني! 🔥';
+  btn.onclick = () => closeModal();
+  openModal();
 }
 
 function showInfoModal(title, msg) {
