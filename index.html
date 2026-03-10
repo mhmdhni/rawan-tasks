@@ -333,7 +333,6 @@ body{
 
 /* ── MISC ── */
 .divider{width:60px;height:3px;background:linear-gradient(90deg,var(--pink),var(--purple));border-radius:50px;margin:16px auto;}
-.back-btn{position:absolute;top:20px;left:20px;}
 
 @media(max-width:600px){
   .q-actions{flex-direction:column;}
@@ -366,6 +365,7 @@ body{
   <button class="btn btn-primary" onclick="showScreen('levels')">
     🚀 يلا نبدأ يا رورو!
   </button>
+  <p style="color:var(--subtext);font-size:12px;margin-top:16px;opacity:0.6;">💾 تقدمك بيتحفظ تلقائياً — تقدري ترجعي في أي وقت!</p>
 </div>
 <!-- ════ LEVEL SELECT ════ -->
 <div id="screen-levels" class="screen">
@@ -416,8 +416,9 @@ body{
         <div class="lock-badge" id="lock-pj">🔒 أكملي Level 2 الأول</div>
       </div>
     </div>
-    <div style="text-align:center;margin-top:28px;">
+    <div style="text-align:center;margin-top:28px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
       <button class="btn btn-outline btn-sm" onclick="showScreen('welcome')">← Back to Home</button>
+      <button class="btn btn-outline btn-sm" onclick="if(confirm('إيه رأيك؟ تمسحي كل التقدم وتبدأي من الأول؟ 🤔')) { localStorage.removeItem('roro_progress'); location.reload(); }" style="border-color:rgba(255,94,94,0.4);color:var(--red);">🗑️ مسح التقدم</button>
     </div>
   </div>
 </div>
@@ -560,7 +561,7 @@ body{
       <div class="stat-label">Project 🏗️</div>
     </div>
   </div>
-  <button class="btn btn-primary" onclick="location.reload()">🔄 ابدأ من الأول</button>
+  <button class="btn btn-primary" onclick="localStorage.removeItem('roro_progress');location.reload()">🔄 ابدأ من الأول</button>
 </div><!-- end #app -->
 
 <!-- ════ MODAL ════ -->
@@ -936,14 +937,51 @@ let state = {
 };
 
 // ══════════════════════════════════════
+//  PROGRESS: SAVE / LOAD
+// ══════════════════════════════════════
+function saveProgress() {
+  try {
+    localStorage.setItem('roro_progress', JSON.stringify({
+      scores: state.scores,
+      answered: { l1: [...state.answered.l1], l2: [...state.answered.l2] },
+      completedLevels: state.completedLevels,
+      wrongAttempts: state.wrongAttempts
+    }));
+  } catch(e) {}
+}
+
+function loadProgress() {
+  try {
+    const saved = localStorage.getItem('roro_progress');
+    if (!saved) return;
+    const d = JSON.parse(saved);
+    state.scores        = d.scores        || state.scores;
+    state.answered.l1   = new Set(d.answered?.l1 || []);
+    state.answered.l2   = new Set(d.answered?.l2 || []);
+    state.completedLevels = d.completedLevels || state.completedLevels;
+    state.wrongAttempts   = d.wrongAttempts   || {};
+  } catch(e) {}
+}
+
+// ESC key closes any open modal
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeModal();
+});
+
+// ══════════════════════════════════════
 //  CODE NORMALIZATION (Robust matching)
 // ══════════════════════════════════════
 function normalizeCode(str) {
   if (!str) return "";
-  return str.trim()
-    .replace(/'/g, '"') // unify quotes
-    .replace(/\s*([=+\-*/(),])\s*/g, '$1') // remove spaces around operators/brackets
-    .replace(/\s+/g, ' '); // collapse remaining multiple spaces
+  // Strip Python single-line comments (#) — ignores # inside strings for simplicity
+  const noComments = str.split('\n').map(line => {
+    const idx = line.indexOf('#');
+    return idx === -1 ? line : line.substring(0, idx);
+  }).join('\n');
+  return noComments.trim()
+    .replace(/'/g, '"')                        // unify quotes
+    .replace(/\s*([=+\-*/(),])\s*/g, '$1')     // remove spaces around operators/brackets
+    .replace(/\s+/g, ' ');                     // collapse remaining whitespace/newlines
 }
 
 // ══════════════════════════════════════
@@ -1100,17 +1138,26 @@ function openCodeInputModal() {
   const q = (lvl === 1 ? L1 : L2)[state.currentQ];
 
   const box = document.getElementById('modal-box');
-  box.className = 'modal-box info'; // Dark theme default
+  box.className = 'modal-box info';
   
   document.getElementById('modal-icon').textContent = '💻';
   document.getElementById('modal-title').textContent = 'اكتبي الكود يا بطلة!';
   document.getElementById('modal-message').innerHTML = 'اكتبي الكود اللي بيحل السؤال ده:<br><span style="color:var(--yellow); font-size:14px;">' + q.question + '</span>';
 
+  // Show hint immediately in Level 1 to help beginners
+  const hintHtml = (lvl === 1 && q.hint)
+    ? `<div class="solution-box" style="border-left-color:var(--yellow);margin-bottom:14px;">
+         <b style="color:var(--yellow);">💡 تلميح:</b> <span style="color:var(--subtext);">${q.hint}</span>
+       </div>`
+    : '';
+
   let html = `
+    ${hintHtml}
     <textarea id="user-code-input" class="code-textarea" placeholder="Type your Python code here..."></textarea>
+    <div style="font-size:11px;color:var(--subtext);margin-bottom:8px;text-align:left;">⌨️ Tab = 4 مسافات &nbsp;•&nbsp; Ctrl+Enter = إرسال</div>
     <div id="code-feedback" class="feedback-msg feedback-error"></div>
     <div id="code-hint-box" class="solution-box" style="display:none; border-left-color: var(--yellow);">
-        <b>💡 تلميح:</b> <span id="code-hint-text"></span>
+        <b>💡 راجعي:</b> <span id="code-hint-text"></span>
     </div>
   `;
   document.getElementById('modal-solution').innerHTML = html;
@@ -1120,7 +1167,24 @@ function openCodeInputModal() {
   btn.onclick = () => checkUserCode();
 
   openModal();
-  setTimeout(() => document.getElementById('user-code-input').focus(), 100);
+  setTimeout(() => {
+    const ta = document.getElementById('user-code-input');
+    ta.focus();
+    ta.addEventListener('keydown', function(e) {
+      // Tab key → insert 4 spaces (important for Python indentation)
+      if (e.key === 'Tab') {
+        e.preventDefault();
+        const s = this.selectionStart, end = this.selectionEnd;
+        this.value = this.value.substring(0, s) + '    ' + this.value.substring(end);
+        this.selectionStart = this.selectionEnd = s + 4;
+      }
+      // Ctrl+Enter → submit
+      if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
+        e.preventDefault();
+        checkUserCode();
+      }
+    });
+  }, 100);
 }
 
 function checkUserCode() {
@@ -1147,6 +1211,7 @@ function checkUserCode() {
     scoreEl.classList.add('score-pulse');
     setTimeout(()=>scoreEl.classList.remove('score-pulse'),400);
 
+    saveProgress();
     spawnConfetti();
     const msgs = lvl === 1 ? L1_CORRECT : L2_CORRECT;
     const msg = msgs[Math.floor(Math.random()*msgs.length)];
@@ -1164,8 +1229,8 @@ function checkUserCode() {
       feedback.textContent = 'قربت جداً! راجعي الأقواس أو علامات التنصيص أو اسم المتغير 👀';
     } else if (attempts === 1) {
       feedback.textContent = 'لأ لسه.. ركزي في الـ Syntax (طريقة الكتابة)!';
-      const hintBox = document.getElementById('code-hint-box');
-      if (q.hint) {
+      if (lvl === 2 && q.hint) {
+        const hintBox = document.getElementById('code-hint-box');
         hintBox.style.display = 'block';
         document.getElementById('code-hint-text').textContent = q.hint;
       }
@@ -1190,6 +1255,7 @@ function giveUpShowSolution() {
     // في Level 1: لو ضغطت "مش عارفة" بيعرض الحل فوراً
     showWrongModal(q, ()=>afterAnswer());
     state.answered['l'+lvl].add(idx);
+    saveProgress();
   } else {
     // في Level 2: أول مرة تشجيع، تاني مرة يعرض الحل
     const attempts = state.wrongAttempts['giveup_' + key] || 0;
@@ -1204,6 +1270,7 @@ function giveUpShowSolution() {
       // لو ضغطت "مش عارفة" للمرة التانية، اعرض الحل
       showWrongModal(q, ()=>afterAnswer());
       state.answered['l'+lvl].add(idx);
+      saveProgress();
     }
   }
 }
@@ -1285,8 +1352,10 @@ function renderProject() {
 
 function completeProject() {
   state.completedLevels.pj = true;
+  saveProgress();
   spawnConfetti();
-  setTimeout(spawnConfetti, 300);
+  setTimeout(spawnConfetti, 400);
+  setTimeout(spawnConfetti, 800);
   document.getElementById('final-score-l1').textContent = state.scores.l1 + '/20';
   document.getElementById('final-score-l2').textContent = state.scores.l2 + '/12';
   showScreen('complete');
@@ -1385,6 +1454,7 @@ function escapeHtml(text) {
   return text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
+loadProgress();
 updateLevelCards();
 </script>
 </body>
