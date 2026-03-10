@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Python Tasks – Level 1 & 2</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@400;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0f1a;
+    --card: #13162b;
+    --border: #1e2340;
+    --accent1: #f7c948;
+    --accent2: #3bf0a0;
+    --accent3: #ff6b6b;
+    --accent4: #7b9cff;
+    --text: #e8eaf0;
+    --muted: #7880a0;
+    --python-blue: #306998;
+    --python-yellow: #ffd43b;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Tajawal', sans-serif;
+    min-height: 100vh;
+    padding: 0 0 80px;
+  }
+
+  /* ── HEADER ── */
+  .hero {
+    background: linear-gradient(135deg, #0a0c18 0%, #131830 50%, #0e1224 100%);
+    border-bottom: 2px solid var(--border);
+    padding: 48px 40px 36px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 600px 300px at 80% 50%, rgba(247,201,72,.06), transparent),
+      radial-gradient(ellipse 400px 200px at 20% 80%, rgba(59,240,160,.05), transparent);
+    pointer-events: none;
+  }
+  .hero-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .hero-tag {
+    display: inline-block;
+    background: rgba(255,212,59,.12);
+    border: 1px solid rgba(255,212,59,.35);
+    color: var(--python-yellow);
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 14px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-size: 42px;
+    font-weight: 900;
+    line-height: 1.15;
+    margin-bottom: 8px;
+  }
+  .hero h1 span { color: var(--python-yellow); }
+  .hero-sub {
+    font-size: 17px;
+    color: var(--muted);
+    font-weight: 400;
+  }
+  .snake {
+    position: absolute;
+    right: 0; top: 50%;
+    transform: translateY(-50%);
+    font-size: 100px;
+    opacity: .08;
+    font-family: serif;
+    user-select: none;
+  }
+
+  /* ── LAYOUT ── */
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ── LEVEL BANNER ── */
+  .level-banner {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 44px 0 28px;
+  }
+  .level-pill {
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 6px 20px;
+    border-radius: 30px;
+    white-space: nowrap;
+  }
+  .level-1 .level-pill { background: rgba(123,156,255,.18); color: var(--accent4); border: 1px solid rgba(123,156,255,.4); }
+  .level-2 .level-pill { background: rgba(59,240,160,.15); color: var(--accent2); border: 1px solid rgba(59,240,160,.35); }
+  .level-banner h2 { font-size: 22px; font-weight: 800; }
+  .level-banner .ar { font-size: 14px; color: var(--muted); font-weight: 400; margin-top: 2px; }
+  .level-line { flex: 1; height: 1px; background: var(--border); }
+
+  /* ── TASK CARD ── */
+  .task-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    margin-bottom: 16px;
+    overflow: hidden;
+    transition: border-color .2s;
+  }
+  .task-card:hover { border-color: rgba(123,156,255,.35); }
+
+  .task-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 18px 20px 14px;
+  }
+  .task-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    background: rgba(255,255,255,.06);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    padding: 3px 9px;
+    border-radius: 6px;
+    min-width: 38px;
+    text-align: center;
+    margin-top: 2px;
+  }
+  .task-texts { flex: 1; }
+  .task-en {
+    font-family: 'Space Mono', monospace;
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--text);
+  }
+  .task-ar {
+    font-size: 14px;
+    color: var(--muted);
+    margin-top: 5px;
+    line-height: 1.7;
+    direction: rtl;
+    text-align: right;
+  }
+  .task-ar::before { content: "🇪🇬 "; font-style: normal; }
+  .points-badge {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    white-space: nowrap;
+    align-self: flex-start;
+  }
+  .pts-easy { background: rgba(123,156,255,.12); color: var(--accent4); border: 1px solid rgba(123,156,255,.25); }
+  .pts-med  { background: rgba(247,201,72,.12);  color: var(--accent1); border: 1px solid rgba(247,201,72,.25); }
+  .pts-hard { background: rgba(59,240,160,.12);  color: var(--accent2); border: 1px solid rgba(59,240,160,.25); }
+
+  /* hint strip */
+  .hint-strip {
+    border-top: 1px solid var(--border);
+    background: rgba(0,0,0,.2);
+    padding: 9px 20px 9px 58px;
+    font-family: 'Space Mono', monospace;
+    font-size: 11.5px;
+    color: var(--muted);
+  }
+  .hint-strip span { color: var(--accent1); }
+
+  /* ── PROJECT CARD ── */
+  .project-card {
+    background: linear-gradient(135deg, #101430, #141a38);
+    border: 1px solid rgba(59,240,160,.25);
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+  .project-header {
+    background: rgba(59,240,160,.07);
+    border-bottom: 1px solid rgba(59,240,160,.18);
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .project-icon { font-size: 24px; }
+  .project-title-en {
+    font-family: 'Space Mono', monospace;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--accent2);
+  }
+  .project-title-ar {
+    font-size: 13px;
+    color: var(--muted);
+    direction: rtl;
+  }
+  .project-body { padding: 20px 24px; }
+  .project-desc-en {
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .project-desc-ar {
+    font-size: 14px;
+    color: var(--muted);
+    direction: rtl;
+    text-align: right;
+    line-height: 1.8;
+    margin-bottom: 20px;
+  }
+  .requirements-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .req-item {
+    background: rgba(0,0,0,.3);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 14px;
+  }
+  .req-en {
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .req-ar {
+    font-size: 12px;
+    color: var(--muted);
+    direction: rtl;
+    text-align: right;
+  }
+  .req-check { color: var(--accent2); margin-left: 4px; }
+
+  /* ── SCORING ── */
+  .score-bar {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px 24px;
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  .score-item { text-align: center; }
+  .score-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 28px;
+    font-weight: 700;
+  }
+  .score-label-en { font-size: 11px; color: var(--muted); font-family: 'Space Mono', monospace; }
+  .score-label-ar { font-size: 12px; color: var(--muted); direction: rtl; }
+  .score-divider { width: 1px; height: 50px; background: var(--border); }
+
+  /* ── FOOTER ── */
+  .footer-note {
+    text-align: center;
+    margin-top: 48px;
+    color: var(--muted);
+    font-size: 13px;
+  }
+  .footer-note strong { color: var(--python-yellow); font-family: 'Space Mono', monospace; }
+
+  /* ── PRINT ── */
+  @media print {
+    body { background: white; color: #111; }
+    .hero, .task-card, .project-card, .score-bar {
+      background: white !important;
+      border-color: #ddd !important;
+      color: #111 !important;
+    }
+    .task-en, .project-desc-en, .req-en { color: #111 !important; }
+    .task-ar, .project-desc-ar, .req-ar, .score-label-ar { color: #555 !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">Python Beginner Tasks • روان البدرى 🌸</div>
+    <h1>يلا يا <span>رورو</span> 💪</h1>
+    <p class="hero-sub" style="font-size:15px; margin-bottom:6px">Rawan Elbadry's Python Practice Sheet</p>
+    <p class="hero-sub">Level 1 → Direct Commands &nbsp;|&nbsp; Level 2 → Challenge Mode 🔥</p>
+    <div class="snake">🐍</div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- ═══════════════════ LEVEL 1 ═══════════════════ -->
+  <div class="level-banner level-1">
+    <div class="level-pill">Level 01</div>
+    <div>
+      <div>Direct Commands</div>
+      <div class="ar">أوامر مباشرة</div>
+    </div>
+    <div class="level-line"></div>
+  </div>
+
+  <!-- Task 1 -->
+  <div class="task-card">
+    <div class="task-header">
+      <div class="task-num">#01</div>
+      <div class="task-texts">
+        <div class="task-en">Print your full name, your age, and your country on separate lines.</div>
+        <div class="task-ar">اطبع اسمك الكامل، سنك، وبلدك كل واحدة في سطر لوحده.</div>
+      </div>
+      <div class="points-badge pts-easy">5 pts</div>
+    </div>
+    <div class="hint-strip">Hint: use <span>print()</span> three times, one for each value</div>
+  </div>
+
+  <!-- Task 2 -->
+  <div class="task-card">
+    <div class="task-header">
+      <div class="task-num">#02</div>
+      <div class="task-texts">
+        <div class="task-en">Calculate and print the result of these operations: 15 + 7, 20 - 4, 6 * 8, 100 / 4, 2 ** 10, 17 % 5, 17 // 5.</div>
+        <div class="task-ar">احسب واطبع نتيجة العمليات دي: جمع 15+7، طرح 20-4، ضرب 6×8، قسمة 100÷4، أس 2**10، باقي قسمة 17%5، قسمة صحيحة 17//5.</div>
+      </div>
+      <div class="points-badge pts-easy">7 pts</div>
+    </div>
+    <div class="hint-strip">Hint: use <span>+  -  *  /  **  %  //</span> operators directly inside print()</div>
+  </div>
+
+  <!-- Task 3 -->
+  <div class="task-card">
+    <div class="task-header">
+      <div class="task-num">#03</div>
+      <div class="task-texts">
+        <div class="task-en">Print the data type of each of the following values: 42, 3.14, "Python", [1, 2, 3], {"key": "value"}, {1.1, 2.2}.</div>
+        <div class="task-ar">اطبع نوع البيانات لكل قيمة من دول: عدد صحيح، عدد عشري، نص، قايمة، ديكشيناري، مجموعة.</div>
+      </div>
+      <div class="points-badge pts-easy">6 pts</div>
+    </div>
+    <div class="hint-strip">Hint: use <span>type()</span> inside <span>print()</span> → print(type(42))</div>
+  </div>
+
+  <!-- Task 4 -->
+  <div class="task-card">
+    <div class="task-header">
+      <div class="task-num">#04</div>
+      <div class="task-texts">
+        <div class="task-en">Create variables for: your first name, last name, city, age, and whether you are a student (True/False). Then print each variable with a label.</div>
+        <div class="task-ar">عمل متغيرات لـ: اسمك الأول، اسم العيلة، المدينة، السن، وهل أنت طالب (True/False). واطبع كل متغير مع وصفه.</div>
+      </div>
+      <div class="points-badge pts-easy">8 pts</div>
+    </div>
+    <div class="hint-strip">Hint: <span>first_name = 'Ahmed'</span> then <span>print('First name:', first_name)</span></div>
+  </div>
+
+  <!-- Task 5 -->
+  <div class="task-card">
+    <div class="task-header">
+      <div class="task-num">#05</div>
+      <div class="task-texts">
+        <div class="task-en">Declare 4 variables in a single line (first_name, country, age, is_graduated), then print all four values in one print statement.</div>
+        <div class="task-ar">اعمل 4 متغيرات في سطر واحد بس (اسم أول، بلد، سن، هل تخرجت)، وبعدين اطبعهم كلهم في print واحدة.</div>
+      </div>
+      <div class="points-badge pts-easy">6 pts</div>
+    </div>
+    <div class="hint-strip">Hint: <span>a, b, c = 1, 2, 3</span> — multiple assignment in one line</div>
+  </div>
+
+  <!-- Task 6 -->
+  <div class="task-card">
+    <div class="task-header">
+      <div class="task-num">#06</div>
+      <div class="task-texts">
+        <div class="task-en">Create a variable called <code>my_skills</code> as a list containing at least 5 skills you have. Then print the list and print how many skills are in it.</div>
+        <div class="task-ar">عمل متغير اسمه my_skills قايمة فيها 5 مهارات على الأقل عندك. اطبع القايمة وعدد المهارات فيها.</div>
+      </div>
+      <div class="points-badge pts-easy">6 pts</div>
+    </div>
+    <div class="hint-strip">Hint: use <span>len(my_skills)</span> to get the count</div>
+  </div>
+
+  <!-- Task 7 -->
+  <div class="task-card">
+    <div class="task-header">
+      <div class="task-num">#07</div>
+      <div class="task-texts">
+        <div class="task-en">Create a dictionary called <code>person_info</code> with keys: firstname, lastname, country, city, age. Print the dictionary and print the length of the first name.</div>
+        <div class="task-ar">عمل ديكشيناري اسمه person_info بالمفاتيح دي: اسم أول، اسم عيلة، بلد، مدينة، سن. اطبع الديكشيناري وطول الاسم الأول.</div>
+      </div>
+      <div class="points-badge pts-easy">7 pts</div>
+    </div>
+    <div class="hint-strip">Hint: <span>len(person_info['firstname'])</span> gives the character count</div>
+  </div>
+
+
+  <!-- ═══════════════════ LEVEL 2 ═══════════════════ -->
+  <div class="level-banner level-2" style="margin-top:52px">
+    <div class="level-pill">Level 02</div>
+    <div>
+      <div>Challenge Mode 🔥 — Think Before You Type!</div>
+      <div class="ar">تحدي! — فكري الأول وبعدين اكتبي 🧠</div>
+    </div>
+    <div class="level-line"></div>
+  </div>
+
+  <!-- challenge intro -->
+  <div style="background:rgba(255,107,107,.07); border:1px solid rgba(255,107,107,.25); border-radius:12px; padding:14px 20px; margin-bottom:22px; display:flex; gap:12px; align-items:flex-start;">
+    <div style="font-size:22px; margin-top:2px;">⚠️</div>
+    <div>
+      <div style="font-family:'Space Mono',monospace; font-size:13px; color:#ff9e9e; margin-bottom:4px;">No hints in this level, يا رورو! You've got this 💪</div>
+      <div style="font-size:13px; color:var(--muted); direction:rtl; text-align:right;">الليفل ده مفيش hints — فكري في إيه اللي اتعلمتيه وطبقيه بنفسك!</div>
+    </div>
+  </div>
+
+  <!-- Task 8 -->
+  <div class="task-card">
+    <div class="task-header">
+      <div class="task-num">#08</div>
+      <div class="task-texts">
+        <div class="task-en">What is the data type of <code>type("hello")</code> itself? Write a <strong>single</strong> print statement that wraps type() inside type() to find out. What do you expect the answer to be — before you run it?</div>
+        <div class="task-ar">إيه نوع بيانات الـ type("hello") نفسه؟ اكتبي print واحدة بس تحط type() جوا type() عشان تعرفي. فكري إيه الإجابة قبل ما تشتغلي الكود!</div>
+      </div>
+      <div class="points-badge pts-hard">12 pts</div>
+    </div>
+  </div>
+
+  <!-- Task 9 -->
+  <div class="task-card">
+    <div class="task-header">
+      <div class="task-num">#09</div>
+      <div class="task-texts">
+        <div class="task-en">Create two variables: <code>x = "Rawan"</code> and <code>y = "Python"</code>. Swap their values using a <strong>single line</strong> of code (no temp variable!). Print both before and after the swap to prove it worked.</div>
+        <div class="task-ar">عمل متغيرين: x = "Rawan" و y = "Python". بادلي قيمهم في سطر واحد بس من غير متغير مؤقت! اطبعيهم قبل وبعد المبادلة عشان تثبتي إنها اشتغلت.</div>
+      </div>
+      <div class="points-badge pts-hard">12 pts</div>
+    </div>
+  </div>
+
+  <!-- Task 10 -->
+  <div class="task-card">
+    <div class="task-header">
+      <div class="task-num">#10</div>
+      <div class="task-texts">
+        <div class="task-en">Create a <code>person_info</code> dictionary with 5 keys (name, age, height, skills, is_active). In <strong>5 separate nested print statements</strong>, print the type of each value by accessing it directly from the dictionary. Do NOT use extra variables.</div>
+        <div class="task-ar">عمل ديكشيناري person_info بـ 5 مفاتيح (name, age, height, skills, is_active). في 5 print منفصلة ومتداخلة، اطبعي نوع كل قيمة وانتي بتوصليها مباشرة من الديكشيناري. من غير ما تعمل متغيرات إضافية.</div>
+      </div>
+      <div class="points-badge pts-hard">15 pts</div>
+    </div>
+  </div>
+
+  <!-- Task 11 -->
+  <div class="task-card">
+    <div class="task-header">
+      <div class="task-num">#11</div>
+      <div class="task-texts">
+        <div class="task-en">
+          <strong>Predict the type, then verify!</strong><br>
+          Look at this expression: <code>(10 + 3.0) * (7 // 2) - (2 ** 3) % 3</code><br>
+          Step 1: Write a comment in your code with your prediction of the type.<br>
+          Step 2: Calculate and store the result in a variable.<br>
+          Step 3: Print the result AND its type in <strong>one nested print</strong>.<br>
+          Were you right? 🤔
+        </div>
+        <div class="task-ar">
+          تنبئي بالنوع الأول، وبعدين تحققي!<br>
+          بصي في التعبير ده: (10 + 3.0) * (7 // 2) - (2 ** 3) % 3<br>
+          خطوة 1: اكتبي تعليق في الكود بتوقعك لنوع الناتج.<br>
+          خطوة 2: احسبي النتيجة واخزنيها في متغير.<br>
+          خطوة 3: اطبعي الناتج ونوعه في print واحدة متداخلة.<br>
+          هل كنتي صح؟ 🤔
+        </div>
+      </div>
+      <div class="points-badge pts-hard">15 pts</div>
+    </div>
+  </div>
+
+  <!-- Task 12 -->
+  <div class="task-card">
+    <div class="task-header">
+      <div class="task-num">#12</div>
+      <div class="task-texts">
+        <div class="task-en">
+          <strong>Name Score Calculator!</strong><br>
+          Store your first name and last name in two variables. Then in a <strong>single line</strong>, calculate a "name score" like this:<br>
+          <code>score = len(first_name) ** 2 + len(last_name) * 3 - 1</code><br>
+          Print the score, its type, and also print: <code>"Is my score even? "</code> followed by <code>score % 2 == 0</code> (all in separate prints).
+        </div>
+        <div class="task-ar">
+          حاسبة نقاط الاسم!<br>
+          خزني اسمك الأول واسم العيلة في متغيرين. وبعدين في سطر واحد احسبي "نقاط الاسم" كده:<br>
+          score = len(first_name) ** 2 + len(last_name) * 3 - 1<br>
+          اطبعي الناتج، نوعه، وكمان اطبعي: هل النقاط زوجية؟ باستخدام score % 2 == 0 (كل حاجة في print منفصلة).
+        </div>
+      </div>
+      <div class="points-badge pts-hard">18 pts</div>
+    </div>
+  </div>
+
+  <!-- Task 13 -->
+  <div class="task-card">
+    <div class="task-header">
+      <div class="task-num">#13</div>
+      <div class="task-texts">
+        <div class="task-en">
+          <strong>The Ultimate Nesting Challenge!</strong><br>
+          In exactly <strong>ONE print statement</strong>, print all of this together:<br>
+          Your full name (first + last), the length of your full name, and the type of that length.<br>
+          Format: <code>print("Name:", ..., "| Length:", ..., "| Type:", ...)</code><br>
+          Everything must be computed inline — no pre-stored variables allowed!
+        </div>
+        <div class="task-ar">
+          تحدي التداخل الأقصى!<br>
+          في print واحدة بالظبط، اطبعي كل ده مع بعض:<br>
+          اسمك الكامل (أول + عيلة)، طول الاسم الكامل، ونوع الطول ده.<br>
+          الشكل: print("Name:", ..., "| Length:", ..., "| Type:", ...)<br>
+          كل حاجة لازم تتحسب في اللحظة — مش مسموح بمتغيرات مخزنة!
+        </div>
+      </div>
+      <div class="points-badge pts-hard">20 pts</div>
+    </div>
+  </div>
+
+
+  <!-- ═══ MINI PROJECT ═══ -->
+  <div style="margin-top:40px; margin-bottom:10px">
+    <div style="font-family:'Space Mono',monospace; font-size:12px; letter-spacing:2px; color:var(--accent2); margin-bottom:8px;">★ MINI PROJECT / مشروع روان البدرى 🌸</div>
+  </div>
+
+  <div class="project-card">
+    <div class="project-header">
+      <div class="project-icon">🪪</div>
+      <div>
+        <div class="project-title-en">Smart Personal Profile Card</div>
+        <div class="project-title-ar">بطاقة البروفايل الذكية — خصيصاً لروان البدرى 🌸</div>
+      </div>
+    </div>
+    <div class="project-body">
+      <div class="project-desc-en">
+        Build a complete Python script that stores your personal info, performs calculations on it, and prints a beautifully formatted profile card. This time — every printed value must show its data type right next to it, and you must use ALL 7 math operators somewhere in the script!
+      </div>
+      <div class="project-desc-ar">
+        ابني سكريبت بايثون كامل بيخزن بياناتك الشخصية، بيعمل حسابات عليها، وبيطبع بطاقة بروفايل جميلة ومنظمة. المرة دي — كل قيمة مطبوعة لازم يظهر جنبها نوع البيانات بتاعها، ولازم تستخدم كل الـ 7 عمليات حسابية في السكريبت!
+      </div>
+
+      <div class="requirements-grid">
+        <div class="req-item">
+          <div class="req-en"><span class="req-check">✓</span> Assign 5+ personal variables including a list & dict</div>
+          <div class="req-ar">خزّني 5+ متغيرات شخصية فيها قايمة وديكشيناري</div>
+        </div>
+        <div class="req-item">
+          <div class="req-en"><span class="req-check">✓</span> Swap first_name & last_name in ONE line, then swap back</div>
+          <div class="req-ar">بادلي الاسم الأول والعيلة في سطر واحد، وبعدين رجّعيهم</div>
+        </div>
+        <div class="req-item">
+          <div class="req-en"><span class="req-check">✓</span> Print type() of every single variable you created</div>
+          <div class="req-ar">اطبعي type() لكل متغير عملتيه</div>
+        </div>
+        <div class="req-item">
+          <div class="req-en"><span class="req-check">✓</span> Use all 7 operators: + - * / ** % // somewhere</div>
+          <div class="req-ar">استخدمي كل الـ 7 عمليات: + - * / ** % // في أي مكان</div>
+        </div>
+        <div class="req-item">
+          <div class="req-en"><span class="req-check">✓</span> Calculate your "name score" and print it with its type</div>
+          <div class="req-ar">احسبي "نقاط اسمك" واطبعيها مع نوعها</div>
+        </div>
+        <div class="req-item">
+          <div class="req-en"><span class="req-check">✓</span> Access dict values directly and print their types (nested)</div>
+          <div class="req-ar">وصّلي لقيم الديكشيناري مباشرة واطبعي نوعها (متداخل)</div>
+        </div>
+        <div class="req-item">
+          <div class="req-en"><span class="req-check">✓</span> One mega print: full_name + length + type of length inline</div>
+          <div class="req-ar">print واحدة عملاقة: الاسم الكامل + طوله + نوع الطول كلها inline</div>
+        </div>
+        <div class="req-item">
+          <div class="req-en"><span class="req-check">✓</span> Use =, --- separators and make the output look 🔥</div>
+          <div class="req-ar">استخدمي فواصل = و --- وخلّي الـ output يبان ✨</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EXPECTED OUTPUT PREVIEW -->
+  <div style="background:#080b16; border:1px solid var(--border); border-radius:12px; padding:20px 24px; margin-bottom:24px; font-family:'Space Mono',monospace; font-size:12px; line-height:2; color:#8dfc9e; position:relative;">
+    <div style="position:absolute;top:12px;right:16px;font-size:11px;color:var(--muted);font-family:'Tajawal',sans-serif;">Expected Output / الناتج المتوقع</div>
+    <div style="color:var(--accent1)">====== 🌸 Rawan Elbadry's Profile Card 🌸 ======</div>
+    <div><span style="color:#7b9cff">Full Name :</span> Rawan Elbadry  <span style="color:var(--muted)">| type: &lt;class 'str'&gt;</span></div>
+    <div><span style="color:#7b9cff">Name Len  :</span> 13          <span style="color:var(--muted)">| type: &lt;class 'int'&gt;</span></div>
+    <div style="color:var(--muted)">---------------------------------------</div>
+    <div><span style="color:#7b9cff">Age       :</span> 20  <span style="color:var(--muted)">| type: &lt;class 'int'&gt;</span></div>
+    <div><span style="color:#7b9cff">Height    :</span> 1.65  <span style="color:var(--muted)">| type: &lt;class 'float'&gt;</span></div>
+    <div><span style="color:#7b9cff">Is Student:</span> True  <span style="color:var(--muted)">| type: &lt;class 'bool'&gt;</span></div>
+    <div style="color:var(--muted)">---------------------------------------</div>
+    <div><span style="color:#7b9cff">Skills    :</span> ['Python', 'Math', 'Art']  <span style="color:var(--muted)">| type: &lt;class 'list'&gt;</span></div>
+    <div><span style="color:#7b9cff">Num Skills:</span> 3</div>
+    <div style="color:var(--muted)">---------------------------------------</div>
+    <div><span style="color:#7b9cff">Name Score:</span> 87  <span style="color:var(--muted)">| type: &lt;class 'int'&gt;</span></div>
+    <div><span style="color:#7b9cff">Even Score:</span> False</div>
+    <div style="color:var(--accent1)">========================================</div>
+  </div>
+
+  <!-- SCORING -->
+  <div class="score-bar">
+    <div class="score-item">
+      <div class="score-num" style="color:var(--accent4)">45</div>
+      <div class="score-label-en">Level 1 pts</div>
+      <div class="score-label-ar">نقاط الليفل 1</div>
+    </div>
+    <div class="score-divider"></div>
+    <div class="score-item">
+      <div class="score-num" style="color:var(--accent3)">72</div>
+      <div class="score-label-en">Level 2 pts</div>
+      <div class="score-label-ar">نقاط الليفل 2</div>
+    </div>
+    <div class="score-divider"></div>
+    <div class="score-item">
+      <div class="score-num" style="color:var(--accent2)">30</div>
+      <div class="score-label-en">Project pts</div>
+      <div class="score-label-ar">نقاط المشروع</div>
+    </div>
+    <div class="score-divider"></div>
+    <div class="score-item">
+      <div class="score-num" style="color:var(--accent1)">147</div>
+      <div class="score-label-en">Total</div>
+      <div class="score-label-ar">المجموع</div>
+    </div>
+    <div style="flex:1"></div>
+    <div style="text-align:right">
+      <div style="font-family:'Space Mono',monospace;font-size:11px;color:var(--muted)">You can do it, Rawan! 🌸</div>
+      <div style="font-size:13px;color:var(--muted);direction:rtl">إنتي قادرة يا رورو 💪</div>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    <strong>Good Luck Rawan Elbadry!</strong> &nbsp;|&nbsp; بالتوفيق يا رورو 🌸🐍
+  </div>
+
+</div>
+</body>
+</html>
